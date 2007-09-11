@@ -1,11 +1,7 @@
-%define name    setup
-%define version 2.7.9
-%define release %mkrel 1
-
-Name:       %{name}
-Version:    %{version}
-Release:    %{release}
 Summary:    A set of system configuration and setup files
+Name:       setup
+Version:    2.7.9
+Release:    %mkrel 2
 License:    public domain
 Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/config/setup/
@@ -97,5 +93,3 @@ fi
 if [ -e /etc/exports.rpmsave ]; then
   mv -f /etc/exports.rpmsave /etc/exports && echo "warning: /etc/exports.rpmsave restored as /etc/exports"
 fi
-
-
