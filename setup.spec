@@ -1,6 +1,6 @@
 %define name    setup
-%define version 2.7.8
-%define release %mkrel 2
+%define version 2.7.9
+%define release %mkrel 1
 
 Name:       %{name}
 Version:    %{version}
@@ -47,7 +47,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc ChangeLog
+%doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
 %ghost %verify(not md5 size mtime) %{_sysconfdir}/mtab
