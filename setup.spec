@@ -1,7 +1,7 @@
 Summary:    A set of system configuration and setup files
 Name:       setup
-Version:    2.7.9
-Release:    %mkrel 2
+Version:    2.7.10
+Release:    %mkrel 1
 License:    public domain
 Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/config/setup/
@@ -74,7 +74,6 @@ rm -rf %{buildroot}
 %attr(0644,root,root) %config(missingok,noreplace) %{_sysconfdir}/securetty
 %config(noreplace) %{_sysconfdir}/csh.login
 %config(noreplace) %{_sysconfdir}/csh.cshrc
-%{_sysconfdir}/profile.d/*
 %ghost %verify(not md5 size mtime) /var/log/lastlog
 
 %posttrans
