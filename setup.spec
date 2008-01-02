@@ -15,6 +15,7 @@ Requires:   shadow-utils
 Requires(posttrans): shadow-utils
 # prevent the shell to fail running post script:
 Requires(posttrans): glibc
+BuildRoot:  %{_tmppath}/%{name}-%{version}
 # explicit file provides
 Provides: /usr/bin/run-parts
 
