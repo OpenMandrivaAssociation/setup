@@ -1,6 +1,6 @@
 Summary:    A set of system configuration and setup files
 Name:       setup
-Version:    2.7.10
+Version:    2.7.11
 Release:    %mkrel 1
 License:    public domain
 Group:      System/Configuration/Other
