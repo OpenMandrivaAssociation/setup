@@ -4,7 +4,7 @@ Version:    2.7.10
 Release:    %mkrel 1
 License:    public domain
 Group:      System/Configuration/Other
-Url:        http://svn.mandriva.com/svn/config/setup/
+Url:        http://svn.mandriva.com/svn/soft/setup/trunk
 Source:     %{name}-%{version}.tar.bz2
 Conflicts:  crontabs <= 1.7-12mdk
 Conflicts:  bash <= 2.05-2mdk
