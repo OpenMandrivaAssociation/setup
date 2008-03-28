@@ -36,6 +36,8 @@ administration.
 rm -rf %{buildroot}
 %makeinstall_std
 
+find %buildroot -name "run-parts*" | xargs rm
+
 %clean
 rm -rf %{buildroot}
 
@@ -48,7 +50,6 @@ rm -rf %{buildroot}
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
-%{_mandir}/man8/*8*
 %config(noreplace) %{_sysconfdir}/services
 %config(noreplace) %{_sysconfdir}/inputrc
 %config(noreplace) %{_sysconfdir}/filesystems
