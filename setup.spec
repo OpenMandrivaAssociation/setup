@@ -1,7 +1,7 @@
 Summary:    A set of system configuration and setup files
 Name:       setup
 Version:    2.7.11
-Release:    %mkrel 1
+Release:    %mkrel 2
 License:    public domain
 Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/soft/setup/trunk
@@ -16,8 +16,6 @@ Requires(posttrans): shadow-utils
 # prevent the shell to fail running post script:
 Requires(posttrans): glibc
 BuildRoot:  %{_tmppath}/%{name}-%{version}
-# explicit file provides
-Provides: /usr/bin/run-parts
 
 %description
 The setup package contains a set of very important system
@@ -51,15 +49,6 @@ rm -rf %{buildroot}
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
 %{_mandir}/man8/*8*
-# find_lang can't find man pages yet :-(
-%lang(cs) %_mandir/cs/man8/*8*
-%lang(et) %_mandir/et/man8/*8*
-%lang(eu) %_mandir/eu/man8/*8*
-%lang(fr) %_mandir/fr/man8/*8*
-%lang(it) %_mandir/it/man8/*8*
-%lang(nl) %_mandir/nl/man8/*8*
-%lang(uk) %_mandir/uk/man8/*8*
-%{_bindir}/run-parts
 %config(noreplace) %{_sysconfdir}/services
 %config(noreplace) %{_sysconfdir}/inputrc
 %config(noreplace) %{_sysconfdir}/filesystems
