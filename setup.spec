@@ -1,7 +1,7 @@
 Summary:    A set of system configuration and setup files
 Name:       setup
 Version:    2.7.11
-Release:    %mkrel 2
+Release:    %mkrel 3
 License:    public domain
 Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/soft/setup/trunk
@@ -16,6 +16,8 @@ Requires(posttrans): shadow-utils
 # prevent the shell to fail running post script:
 Requires(posttrans): glibc
 BuildRoot:  %{_tmppath}/%{name}-%{version}
+# for backward compatibility, to remove when other packages correctly require run-parts directly:
+Requires:   run-parts
 
 %description
 The setup package contains a set of very important system
