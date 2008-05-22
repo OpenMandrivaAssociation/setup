@@ -1,7 +1,7 @@
 Summary:    A set of system configuration and setup files
 Name:       setup
 Version:    2.7.12
-Release:    %mkrel 2
+Release:    %mkrel 3
 License:    public domain
 Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/soft/setup/trunk
@@ -48,15 +48,15 @@ rm -rf %{buildroot}
 # due to important new group additions, we need to add them manually here if they
 # don't already exist because rpm will create group.rpmnew instead
 if [ -f /etc/group ]; then
-    grep -q '^auth:' /etc/group || groupadd -g 27 auth
+    grep -q '^auth:' /etc/group || %_pre_groupadd auth
     # be a little fancy here in case this is an upgrade and the user hasn't migrated to tcb yet
     if [ "`grep -q '^shadow:' /etc/group; echo $?`" == 1 ]; then
-        groupadd -g 25 shadow
+        %_pre_groupadd shadow
         if [ -f /etc/shadow ]; then
             chmod 0440 /etc/shadow && chgrp shadow /etc/shadow
         fi
     fi
-    grep -q '^chkpwd:' /etc/group || groupadd -g 26 chkpwd
+    grep -q '^chkpwd:' /etc/group || %_pre_groupadd chkpwd
 fi
 
 
