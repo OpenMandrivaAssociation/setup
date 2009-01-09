@@ -1,6 +1,6 @@
 Summary:    A set of system configuration and setup files
 Name:       setup
-Version:    2.7.15
+Version:    2.7.16
 Release:    %mkrel 1
 License:    public domain
 Group:      System/Configuration/Other
@@ -57,6 +57,7 @@ if [ -f /etc/group ]; then
         fi
     fi
     grep -q '^chkpwd:' /etc/group || %_pre_groupadd chkpwd
+    grep -q '^dialout:' /etc/group || %_pre_groupadd dialout
 fi
 
 
