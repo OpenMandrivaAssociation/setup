@@ -1,7 +1,7 @@
 Summary:    A set of system configuration and setup files
 Name:       setup
-Version:    2.7.17
-Release:    %mkrel 2
+Version:    2.7.18
+Release:    %mkrel 1
 License:    public domain
 Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/soft/setup/trunk
