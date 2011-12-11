@@ -1,23 +1,15 @@
 Summary:    A set of system configuration and setup files
 Name:       setup
 Version:    2.7.18
-Release:    %mkrel 3
+Release:    4
 License:    public domain
 Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/soft/setup/trunk
-Source:     %{name}-%{version}.tar.bz2
-Conflicts:  crontabs <= 1.7-12mdk
-Conflicts:  bash <= 2.05-2mdk
-Conflicts:  kdebase < 2.2.2-41mdk
-Conflicts:  proftpd < 1.2.5-0.rc1.3mdk
-Conflicts:  DansGuardian < 2.2.3-4mdk
-Requires:   shadow-utils
-Requires(posttrans): shadow-utils
+Source0:	%{name}-%{version}.tar.bz2
+
+Requires(posttrans): shadow-conv
 # prevent the shell to fail running post script:
 Requires(posttrans): glibc
-BuildRoot:  %{_tmppath}/%{name}-%{version}
-# for backward compatibility, to remove when other packages correctly require run-parts directly:
-Requires:   run-parts
 
 %description
 The setup package contains a set of very important system
@@ -40,10 +32,6 @@ rm -rf %{buildroot}
 
 find %buildroot -name "run-parts*" | xargs rm
 
-%clean
-rm -rf %{buildroot}
-
-
 %pre
 # due to important new group additions, we need to add them manually here if they
 # don't already exist because rpm will create group.rpmnew instead
@@ -60,9 +48,7 @@ if [ -f /etc/group ]; then
     grep -q '^dialout:' /etc/group || %_pre_groupadd dialout
 fi
 
-
 %files
-%defattr(-,root,root)
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
