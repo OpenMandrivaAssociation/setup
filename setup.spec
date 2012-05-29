@@ -1,7 +1,10 @@
+%define debug_package          %{nil}
+%define _enable_debug_packages %{nil}
+
 Summary:    A set of system configuration and setup files
 Name:       setup
 Version:    2.7.18
-Release:    4
+Release:    5
 License:    public domain
 Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/soft/setup/trunk
@@ -31,6 +34,7 @@ rm -rf %{buildroot}
 %makeinstall_std
 
 find %buildroot -name "run-parts*" | xargs rm
+rm -rf %{buildroot}/etc/mtab
 
 %pre
 # due to important new group additions, we need to add them manually here if they
@@ -52,7 +56,6 @@ fi
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
-%ghost %verify(not md5 size mtime) %{_sysconfdir}/mtab
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
@@ -77,7 +80,6 @@ pwconv 2>/dev/null >/dev/null  || :
 grpconv 2>/dev/null >/dev/null  || :
 
 [ -f /var/log/lastlog ] || echo -n '' > /var/log/lastlog
-[ -f %{_sysconfdir}/mtab ] || echo -n '' > %{_sysconfdir}/mtab
 
 if [ -x /usr/sbin/nscd ]; then
 	nscd -i passwd -i group || :
