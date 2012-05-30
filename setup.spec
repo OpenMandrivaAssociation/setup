@@ -10,6 +10,7 @@ Group:      System/Configuration/Other
 Url:        http://svn.mandriva.com/svn/soft/setup/trunk
 Source0:	%{name}-%{version}.tar.bz2
 
+Requires(pre):	rpm-helper
 Requires(posttrans): shadow-conv
 # prevent the shell to fail running post script:
 Requires(posttrans): glibc
