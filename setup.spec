@@ -2,7 +2,7 @@ Summary:	A set of system configuration and setup files
 Name:		setup
 Version:	2.7.18
 Release:	5
-License		public domain
+License		Public Domain
 Group:		System/Configuration/Other
 Url:		http://svn.mandriva.com/svn/soft/setup/trunk
 Source0:	%{name}-%{version}.tar.bz2
@@ -31,7 +31,7 @@ administration.
 %install
 %makeinstall_std
 
-find %buildroot -name "run-parts*" | xargs rm
+find %{buildroot} -name "run-parts*" | xargs rm
 rm -rf %{buildroot}/etc/mtab
 
 %pre
