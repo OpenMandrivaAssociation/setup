@@ -1,6 +1,3 @@
-%define debug_package          %{nil}
-%define _enable_debug_packages %{nil}
-
 Summary:    A set of system configuration and setup files
 Name:       setup
 Version:    2.7.18
@@ -14,6 +11,7 @@ Requires(pre):	rpm-helper
 Requires(posttrans): shadow-conv
 # prevent the shell to fail running post script:
 Requires(posttrans): glibc
+BuildArch:	noarch
 
 %description
 The setup package contains a set of very important system
