@@ -29,7 +29,6 @@ administration.
 %make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 find %buildroot -name "run-parts*" | xargs rm
