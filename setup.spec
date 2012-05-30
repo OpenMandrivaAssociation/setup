@@ -1,16 +1,16 @@
-Summary:    A set of system configuration and setup files
-Name:       setup
-Version:    2.7.18
-Release:    5
-License:    public domain
-Group:      System/Configuration/Other
-Url:        http://svn.mandriva.com/svn/soft/setup/trunk
+Summary:	A set of system configuration and setup files
+Name:		setup
+Version:	2.7.18
+Release:	5
+License		public domain
+Group:		System/Configuration/Other
+Url:		http://svn.mandriva.com/svn/soft/setup/trunk
 Source0:	%{name}-%{version}.tar.bz2
 
 Requires(pre):	rpm-helper
-Requires(posttrans): shadow-conv
+Requires(posttrans):shadow-conv
 # prevent the shell to fail running post script:
-Requires(posttrans): glibc
+Requires(posttrans):glibc
 BuildArch:	noarch
 
 %description
@@ -51,6 +51,22 @@ if [ -f /etc/group ]; then
     grep -q '^dialout:' /etc/group || %_pre_groupadd dialout
 fi
 
+%posttrans
+pwconv 2>/dev/null >/dev/null  || :
+grpconv 2>/dev/null >/dev/null  || :
+
+[ -f /var/log/lastlog ] || echo -n '' > /var/log/lastlog
+
+if [ -x /usr/sbin/nscd ]; then
+	nscd -i passwd -i group || :
+fi
+
+%triggerpostun -- setup < 2.7.8
+# the files is no more in setup starting from 2.7.8, it is now in nfs-utils
+if [ -e /etc/exports.rpmsave ]; then
+  mv -f /etc/exports.rpmsave /etc/exports && echo "warning: /etc/exports.rpmsave restored as /etc/exports"
+fi
+
 %files
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
@@ -73,19 +89,3 @@ fi
 %config(noreplace) %{_sysconfdir}/csh.login
 %config(noreplace) %{_sysconfdir}/csh.cshrc
 %ghost %verify(not md5 size mtime) /var/log/lastlog
-
-%posttrans
-pwconv 2>/dev/null >/dev/null  || :
-grpconv 2>/dev/null >/dev/null  || :
-
-[ -f /var/log/lastlog ] || echo -n '' > /var/log/lastlog
-
-if [ -x /usr/sbin/nscd ]; then
-	nscd -i passwd -i group || :
-fi
-
-%triggerpostun -- setup < 2.7.8
-# the files is no more in setup starting from 2.7.8, it is now in nfs-utils
-if [ -e /etc/exports.rpmsave ]; then
-  mv -f /etc/exports.rpmsave /etc/exports && echo "warning: /etc/exports.rpmsave restored as /etc/exports"
-fi
