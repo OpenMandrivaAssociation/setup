@@ -1,7 +1,7 @@
 Summary:	A set of system configuration and setup files
 Name:		setup
 Version:	2.7.18
-Release:	5
+Release:	6
 License		Public Domain
 Group:		System/Configuration/Other
 Url:		http://svn.mandriva.com/svn/soft/setup/trunk
