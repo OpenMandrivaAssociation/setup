@@ -26,7 +26,7 @@ administration.
 %setup -q
 
 %build
-%make CFLAGS="$RPM_OPT_FLAGS"
+%make
 
 %install
 %makeinstall_std
