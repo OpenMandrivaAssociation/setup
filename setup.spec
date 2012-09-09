@@ -1,15 +1,17 @@
 Summary:	A set of system configuration and setup files
 Name:		setup
-Version:	2.7.18
-Release:	6
+Version:	2.7.21
+Release:	1
 License:	Public Domain
 Group:		System/Configuration/Other
 Url:		http://svn.mandriva.com/svn/soft/setup/trunk
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{version}.tar.xz
 
 Requires(pre):	rpm-helper
 Requires(posttrans):shadow-conv
 BuildArch:	noarch
+# for backward compatibility, to remove when other packages correctly require run-parts directly:
+Requires:	run-parts
 
 %description
 The setup package contains a set of very important system
@@ -28,9 +30,6 @@ administration.
 
 %install
 %makeinstall_std
-
-find %{buildroot} -name "run-parts*" | xargs rm
-rm -rf %{buildroot}/etc/mtab
 
 %pre
 # due to important new group additions, we need to add them manually here if they
