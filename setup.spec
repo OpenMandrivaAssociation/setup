@@ -1,7 +1,7 @@
 Summary:	A set of system configuration and setup files
 Name:		setup
 Version:	2.7.21
-Release:	1
+Release:	2
 License:	Public Domain
 Group:		System/Configuration/Other
 Url:		http://svn.mandriva.com/svn/soft/setup/trunk
@@ -10,8 +10,6 @@ Source0:	%{name}-%{version}.tar.xz
 Requires(pre):	rpm-helper
 Requires(posttrans):shadow-conv
 BuildArch:	noarch
-# for backward compatibility, to remove when other packages correctly require run-parts directly:
-Requires:	run-parts
 
 %description
 The setup package contains a set of very important system
