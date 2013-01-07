@@ -8,6 +8,7 @@ Url:		http://svn.mandriva.com/svn/soft/setup/trunk
 Source0:	%{name}-%{version}.tar.xz
 
 Requires(pre):	rpm-helper
+Requires(pre):	grep
 Requires(posttrans):	shadow-conv
 BuildArch:	noarch
 
