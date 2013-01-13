@@ -1,7 +1,7 @@
 Summary:	A set of system configuration and setup files
 Name:		setup
 Version:	2.7.21
-Release:	5
+Release:	6
 License:	Public Domain
 Group:		System/Configuration/Other
 Url:		http://svn.mandriva.com/svn/soft/setup/trunk
@@ -29,7 +29,9 @@ administration.
 %install
 %makeinstall_std
 
-%pre
+# use post rather than pre, as it'll currently not break install then if
+# scriptlet fails
+%post
 # due to important new group additions, we need to add them manually here if they
 # don't already exist because rpm will create group.rpmnew instead
 if [ -f /etc/group ]; then
@@ -84,8 +86,11 @@ fi
 %config(noreplace) %{_sysconfdir}/csh.cshrc
 %ghost %verify(not md5 size mtime) /var/log/lastlog
 
-
 %changelog
+* Sun Jan 13 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.7.21-6
+- change %%pre to %%post scriptlet to avoid failure to install package in case
+  scriptlet fails
+
 * Sun Jan 13 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.7.21-5
 - drop prereqs on grep & rpm-helper to ease up on dependency loops, when
   they're actually needed, rpm-helper is sure to already be installed anyways
