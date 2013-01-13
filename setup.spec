@@ -1,14 +1,12 @@
 Summary:	A set of system configuration and setup files
 Name:		setup
 Version:	2.7.21
-Release:	4
+Release:	5
 License:	Public Domain
 Group:		System/Configuration/Other
 Url:		http://svn.mandriva.com/svn/soft/setup/trunk
 Source0:	%{name}-%{version}.tar.xz
 Requires:	shadow-utils
-Requires(pre):	rpm-helper
-Requires(pre):	grep
 Requires(posttrans):	shadow-conv
 Requires(posttrans):	glibc
 BuildArch:	noarch
@@ -88,6 +86,10 @@ fi
 
 
 %changelog
+* Sun Jan 13 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.7.21-5
+- drop prereqs on grep & rpm-helper to ease up on dependency loops, when
+  they're actually needed, rpm-helper is sure to already be installed anyways
+
 * Sun Sep 09 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.7.21-2
 + Revision: 816563
 - drop dependency on run-parts, we haven't shipped it as part of this package
