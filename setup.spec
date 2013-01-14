@@ -1,7 +1,7 @@
 Summary:	A set of system configuration and setup files
 Name:		setup
 Version:	2.7.21
-Release:	6
+Release:	7
 License:	Public Domain
 Group:		System/Configuration/Other
 Url:		http://svn.mandriva.com/svn/soft/setup/trunk
@@ -29,24 +29,6 @@ administration.
 %install
 %makeinstall_std
 
-# use post rather than pre, as it'll currently not break install then if
-# scriptlet fails
-%post
-# due to important new group additions, we need to add them manually here if they
-# don't already exist because rpm will create group.rpmnew instead
-if [ -f /etc/group ]; then
-    grep -q '^auth:' /etc/group || %_pre_groupadd auth
-    # be a little fancy here in case this is an upgrade and the user hasn't migrated to tcb yet
-    if [ "`grep -q '^shadow:' /etc/group; echo $?`" == 1 ]; then
-        %_pre_groupadd shadow
-        if [ -f /etc/shadow ]; then
-            chmod 0440 /etc/shadow && chgrp shadow /etc/shadow
-        fi
-    fi
-    grep -q '^chkpwd:' /etc/group || %_pre_groupadd chkpwd
-    grep -q '^dialout:' /etc/group || %_pre_groupadd dialout
-fi
-
 %posttrans
 pwconv 2>/dev/null >/dev/null  || :
 grpconv 2>/dev/null >/dev/null  || :
@@ -55,12 +37,6 @@ grpconv 2>/dev/null >/dev/null  || :
 
 if [ -x /usr/sbin/nscd ]; then
 	nscd -i passwd -i group || :
-fi
-
-%triggerpostun -- setup < 2.7.8
-# the files is no more in setup starting from 2.7.8, it is now in nfs-utils
-if [ -e /etc/exports.rpmsave ]; then
-  mv -f /etc/exports.rpmsave /etc/exports && echo "warning: /etc/exports.rpmsave restored as /etc/exports"
 fi
 
 %files
@@ -87,6 +63,9 @@ fi
 %ghost %verify(not md5 size mtime) /var/log/lastlog
 
 %changelog
+* Mon Jan 14 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.7.21-7
+- drop oldass scriptlets
+
 * Sun Jan 13 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 2.7.21-6
 - change %%pre to %%post scriptlet to avoid failure to install package in case
   scriptlet fails
