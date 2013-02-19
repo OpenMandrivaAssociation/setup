@@ -1,0 +1,4 @@
+from Config import *
+from os import environ
+
+addFilter('setup\..*: dir-or-file-in-usr-local')

@@ -1,6 +1,3 @@
-# MD so rpm doesnt complain that now setup owns the system dirs
-%define	_build_pkgcheck_set	%{nil}
-
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.7.21
