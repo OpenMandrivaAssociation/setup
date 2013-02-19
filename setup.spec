@@ -1,3 +1,5 @@
+%define	debug_package %{nil}
+
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.7.21
