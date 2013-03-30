@@ -6,7 +6,7 @@ Version:	2.7.22
 Release:	1
 License:	Public Domain
 Group:		System/Base
-Url:		http://svn.mandriva.com/svn/soft/setup/trunk
+Url:		https://abf.rosalinux.ru/moondrake/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 
