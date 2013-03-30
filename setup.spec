@@ -2,8 +2,8 @@
 
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.7.21
-Release:	8
+Version:	2.7.22
+Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		http://svn.mandriva.com/svn/soft/setup/trunk
