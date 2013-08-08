@@ -3,7 +3,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.7.22
-Release:	2
+Release:	3
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.rosalinux.ru/moondrake/setup
@@ -15,6 +15,7 @@ Requires(posttrans):	shadow-conv
 Requires(posttrans):	glibc
 #BuildArch:	noarch
 %rename		filesystem
+Conflicts:	makedev < 4.4-17
 
 %description
 The setup package contains a set of very important system configuration, setup 
