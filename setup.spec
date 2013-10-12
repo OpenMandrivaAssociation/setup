@@ -3,10 +3,11 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.7.22
-Release:	3
+Release:	4
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.rosalinux.ru/moondrake/setup
+Patch0:		setup-2.7.22-devpts-perms.patch
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 
@@ -28,6 +29,8 @@ system, including the correct permissions for the directories.
 
 %prep
 %setup -q
+%apply_patches
+find . -name "*~" |xargs rm -f
 
 %build
 %make
