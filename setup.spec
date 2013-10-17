@@ -3,11 +3,12 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.7.22
-Release:	4
+Release:	5
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.rosalinux.ru/moondrake/setup
 Patch0:		setup-2.7.22-devpts-perms.patch
+Patch1:		setup-2.7.22-lock-grp.patch
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 
