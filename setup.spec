@@ -3,7 +3,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.7.22
-Release:	6
+Release:	7
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.rosalinux.ru/moondrake/setup
