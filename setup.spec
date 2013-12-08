@@ -2,18 +2,15 @@
 
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.7.22
-Release:	9
+Version:	2.8.0
+Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.rosalinux.ru/moondrake/setup
-Patch0:		setup-2.7.22-devpts-perms.patch
-Patch1:		setup-2.7.22-lock-grp.patch
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 
 #Requires:	shadow-utils
-Requires(posttrans):	shadow-conv
 Requires(posttrans):	glibc
 #BuildArch:	noarch
 %rename		filesystem
@@ -30,8 +27,6 @@ system, including the correct permissions for the directories.
 
 %prep
 %setup -q
-%apply_patches
-find . -name "*~" |xargs rm -f
 
 %build
 %make
@@ -83,9 +78,6 @@ ln -snf spool/mail var/mail
 popd
 
 %posttrans
-pwconv 2>/dev/null >/dev/null  || :
-grpconv 2>/dev/null >/dev/null  || :
-
 [ -f /var/log/lastlog ] || echo -n '' > /var/log/lastlog
 
 if [ -x /usr/sbin/nscd ]; then
@@ -97,10 +89,12 @@ fi
 # setup
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/shadow
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/gshadow
 %config(noreplace) %{_sysconfdir}/services
 %config(noreplace) %{_sysconfdir}/inputrc
 %config(noreplace) %{_sysconfdir}/filesystems
