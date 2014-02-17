@@ -6,7 +6,7 @@ Version:	2.8.0
 Release:	1
 License:	Public Domain
 Group:		System/Base
-Url:		https://abf.rosalinux.ru/moondrake/setup
+Url:		https://abf.rosalinux.ru/mdksoft/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 
