@@ -1,14 +1,14 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.8.1
+Version:	2.8.2
 Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.rosalinux.ru/software/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
-
 Requires(posttrans):	nscd
+BuildArch:	noarch
 
 %description
 The setup package contains a set of very important system configuration, setup 
@@ -29,8 +29,6 @@ system, including the correct permissions for the directories.
 %makeinstall_std
 
 %posttrans
-[ -f /var/log/lastlog ] || echo -n '' > /var/log/lastlog
-
 if [ -x /usr/sbin/nscd ]; then
 	nscd -i passwd -i group || :
 fi
@@ -58,4 +56,5 @@ fi
 %attr(0644,root,root) %config(missingok,noreplace) %{_sysconfdir}/securetty
 %config(noreplace) %{_sysconfdir}/csh.login
 %config(noreplace) %{_sysconfdir}/csh.cshrc
+%dir %{_sysconfdir}/profile.d
 %ghost %verify(not md5 size mtime) /var/log/lastlog
