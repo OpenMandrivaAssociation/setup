@@ -4,7 +4,7 @@ Version:	2.8.1
 Release:	1
 License:	Public Domain
 Group:		System/Base
-Url:		https://abf.rosalinux.ru/mdksoft/setup
+Url:		https://abf.rosalinux.ru/software/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 
