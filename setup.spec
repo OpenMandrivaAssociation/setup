@@ -8,7 +8,7 @@ Url:		https://abf.rosalinux.ru/software/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 
-Requires(posttrans):	glibc
+Requires(posttrans):	nscd
 
 %description
 The setup package contains a set of very important system configuration, setup 
