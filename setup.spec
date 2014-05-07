@@ -1,4 +1,3 @@
-%define	debug_package %{nil}
 
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
@@ -10,11 +9,7 @@ Url:		https://abf.rosalinux.ru/mdksoft/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 
-#Requires:	shadow-utils
 Requires(posttrans):	glibc
-#BuildArch:	noarch
-%rename		filesystem
-Conflicts:	makedev < 4.4-17
 
 %description
 The setup package contains a set of very important system configuration, setup 
@@ -34,49 +29,6 @@ system, including the correct permissions for the directories.
 %install
 %makeinstall_std
 
-# from filesystem
-
-mkdir -p %{buildroot}/%{_lib}
-mkdir -p %{buildroot}/%{_libdir}
-
-mkdir -p %{buildroot}/{mnt,media,bin,boot,dev}
-mkdir -p %{buildroot}/{opt,proc,root,sbin,srv,sys,tmp}
-mkdir -p %{buildroot}/{home,initrd}
-mkdir -p %{buildroot}/lib/modules
-
-mkdir -p %{buildroot}%{_sysconfdir}/{profile.d,security,ssl,sysconfig,default,opt,xinetd.d}
-
-mkdir -p %{buildroot}%{_prefix}/{etc,src,lib}
-mkdir -p %{buildroot}/{%{_bindir},%{_includedir},%{_sbindir},%{_datadir}}
-mkdir -p %{buildroot}/%{_datadir}/{misc,pixmaps,applications,desktop-directories,dict,doc,empty,fonts}
-mkdir -p %{buildroot}/%{_datadir}/color/{icc,cmms,settings}
-
-# man
-mkdir -p %{buildroot}/%{_mandir}/man{1,2,3,4,5,6,7,8,9,n}
-mkdir -p %{buildroot}/%{_infodir}
-
-# games
-mkdir -p %{buildroot}/{%{_gamesbindir},%{_gamesdatadir}}
-mkdir -p %{buildroot}/{%{_libdir},%{_prefix}/lib}/games
-
-mkdir -p %{buildroot}/{%{_libdir},%{_prefix}/lib}/gcc-lib
-
-mkdir -p %{buildroot}/usr/local/{bin,doc,etc,games,lib,%{_lib},sbin,src,libexec,include}
-mkdir -p %{buildroot}/usr/local/share/{applications,desktop-directories}
-mkdir -p %{buildroot}/usr/local/share/{man/man{1,2,3,4,5,6,7,8,9,n},info}
-mkdir -p %{buildroot}/usr/share/ppd
-
-mkdir -p %{buildroot}/var/{adm,local,log,nis,preserve,run,lib,empty}
-mkdir -p %{buildroot}/var/spool/{lpd,mail,news,uucp}
-mkdir -p %{buildroot}/var/lib/{games,misc}
-mkdir -p %{buildroot}/var/{tmp,db,cache/man,opt,games,yp}
-mkdir -p %{buildroot}/var/lock/subsys
-
-pushd %{buildroot}
-ln -snf ../var/tmp usr/tmp
-ln -snf spool/mail var/mail
-popd
-
 %posttrans
 [ -f /var/log/lastlog ] || echo -n '' > /var/log/lastlog
 
@@ -85,8 +37,6 @@ if [ -x /usr/sbin/nscd ]; then
 fi
 
 %files
-
-# setup
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/shadow
@@ -110,51 +60,6 @@ fi
 %config(noreplace) %{_sysconfdir}/csh.login
 %config(noreplace) %{_sysconfdir}/csh.cshrc
 %ghost %verify(not md5 size mtime) /var/log/lastlog
-
-# from filesystem
-%defattr(0755,root,root)
-/bin
-/dev
-/boot
-%dir /etc
-/home
-/initrd
-/lib
-%if %{_lib} != lib
-/%{_lib}
-%endif
-%dir /media
-%dir /mnt
-%dir /opt
-/proc
-/srv
-/sys
-%attr(750,root,root) /root
-/sbin
-%attr(1777,root,root) /tmp
-%{_prefix}
-%dir /var
-/var/adm
-/var/db
-/var/lib
-/var/local
-/var/empty
-%dir %attr(775,root,uucp) /var/lock
-/var/lock/subsys
-/var/cache
-%dir /var/log
-/var/mail
-/var/nis
-/var/opt
-/var/preserve
-/var/run
-%dir /var/spool
-%dir %attr(0755,root,daemon) /var/spool/lpd
-%attr(775,root,mail) /var/spool/mail
-%attr(1777,root,root) /var/tmp
-%attr(775,root,news) /var/spool/news
-%attr(775,root,uucp) /var/spool/uucp
-/var/yp
 
 %changelog
 * Wed Feb 07 2013 Matthew Dawkins <mattydaw@mandriva.org> 2.7.21-8
