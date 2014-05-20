@@ -1,6 +1,6 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.8.2
+Version:	2.8.3
 Release:	1
 License:	Public Domain
 Group:		System/Base
