@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.5
-Release:	1
+Release:	2
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.rosalinux.ru/software/setup
