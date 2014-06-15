@@ -36,7 +36,7 @@ fi
 %files
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
-%verify(not md5 size mtime)%attr(0000,root,root)  %config(noreplace,missingok) %{_sysconfdir}/shadow
+%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) %{_sysconfdir}/shadow
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
