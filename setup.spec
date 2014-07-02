@@ -30,7 +30,7 @@ system, including the correct permissions for the directories.
 %makeinstall_std
 
 %posttrans
-if [ -x /usr/sbin/nscd ]; then
+if [ -x %{_sbindir}/nscd ]; then
 	nscd -i passwd -i group || :
 fi
 
