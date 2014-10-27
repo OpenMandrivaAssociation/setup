@@ -4,7 +4,7 @@ Version:	2.8.6
 Release:	1
 License:	Public Domain
 Group:		System/Base
-Url:		https://abf.rosalinux.ru/software/setup
+Url:		https://abf.io/omv_software/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 Requires(posttrans):	nscd
