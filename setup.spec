@@ -1,6 +1,6 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.8.6
+Version:	2.8.7
 Release:	1
 License:	Public Domain
 Group:		System/Base
@@ -54,7 +54,6 @@ fi
 %config(noreplace) %{_sysconfdir}/profile
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/shells
 %config(noreplace) %{_sysconfdir}/protocols
-%attr(0644,root,root) %config(missingok,noreplace) %{_sysconfdir}/securetty
 %config(noreplace) %{_sysconfdir}/csh.login
 %config(noreplace) %{_sysconfdir}/csh.cshrc
 %dir %{_sysconfdir}/profile.d
