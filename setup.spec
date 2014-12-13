@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.7
-Release:	3
+Release:	4
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/omv_software/setup
