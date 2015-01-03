@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.8.7
-Release:	5
+Version:	2.8.8
+Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/omv_software/setup
@@ -37,7 +37,6 @@ fi
 %files
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
-%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) %{_sysconfdir}/shadow
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
