@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	1
+Release:	2
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/omv_software/setup
@@ -32,6 +32,12 @@ system, including the correct permissions for the directories.
 %posttrans
 if [ -x %{_sbindir}/nscd ]; then
 	nscd -i passwd -i group || :
+fi
+
+# (tpg) various fixes
+if [ $1 -ge 2 ]; then
+    sed -i -e "s,/bin/nologin,/sbin/nologin,g" /etc/shells
+    sed -i -e "s,/sbin:/sbin/halt,/bin:/bin/halt,g" /etc/passwd
 fi
 
 %files
