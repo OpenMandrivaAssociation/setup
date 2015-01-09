@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	2
+Release:	3
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/omv_software/setup
@@ -43,11 +43,12 @@ fi
 %files
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
+%verify(not md5 size mtime) %attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/shadow
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
-%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) %{_sysconfdir}/gshadow
+%verify(not md5 size mtime) %attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/gshadow
 %config(noreplace) %{_sysconfdir}/services
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/inputrc
 %config(noreplace) %{_sysconfdir}/filesystems
@@ -57,7 +58,7 @@ fi
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/motd
 %config(noreplace) %{_sysconfdir}/printcap
 %config(noreplace) %{_sysconfdir}/profile
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/shells
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/shells
 %config(noreplace) %{_sysconfdir}/protocols
 %config(noreplace) %{_sysconfdir}/csh.login
 %config(noreplace) %{_sysconfdir}/csh.cshrc
