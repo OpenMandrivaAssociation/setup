@@ -1,13 +1,14 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	6
+Release:	7
 License:	Public Domain
 Group:		System/Base
-Url:		https://abf.io/omv_software/setup
+Url:		https://abf.io/software/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 Requires(posttrans):	nscd
+Requires(posttrans):	shadow-conv
 Requires(pre):	%{dlopen_req nss_files}
 BuildArch:	noarch
 
@@ -45,12 +46,12 @@ sed -i -e "s,/sbin:/sbin/halt,/bin:/bin/halt,g" /etc/passwd ||:
 %files
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
-%verify(not md5 size mtime) %attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/shadow
+%attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/shadow
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
-%verify(not md5 size mtime) %attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/gshadow
+%attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/gshadow
 %config(noreplace) %{_sysconfdir}/services
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/inputrc
 %config(noreplace) %{_sysconfdir}/filesystems
