@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	7
+Release:	8
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -9,7 +9,7 @@ Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 Requires(posttrans):	nscd
 Requires(posttrans):	shadow-conv
-Requires(pre):	%{dlopen_req nss_files}
+#Requires(pre):	%{dlopen_req nss_files}
 BuildArch:	noarch
 
 %description
