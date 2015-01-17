@@ -27,26 +27,28 @@ system, including the correct permissions for the directories.
 %install
 %makeinstall_std
 
-# (tpg) versioned pre/triggerin are to keep backup of
+# (tpg) versioned pre/post trans are here to keep backup of
 # already existing /etc/shadow and /etc/gshadow to
-# keep them away of being rewriten by new files with this rpm
+# keep them away from being rewriten by new files with this rpm
 # and finally allow user to login with his old passwords
-%pretriggerin -- setup < 2.8.8-9
+%pretrans
 if [ -e /etc/shadow ]; then
-	mv -f /etc/shadow /etc/shadow.bakup
+	mv -f /etc/shadow /etc/shadow.backup
 fi
 
 if [ -e /etc/gshadow ]; then
-	mv -f /etc/gshadow /etc/gshadow.bakup
+	mv -f /etc/gshadow /etc/gshadow.backup
 fi
 
-%triggerin -- setup < 2.8.8-9
+%posttrans
 if [ -e /etc/shadow.backup ]; then
 	mv -f /etc/shadow.bak /etc/shadow
+    rm -rf /etc/shadow.backup
 fi
 
 if [ -e /etc/gshadow.backup ]; then
 	mv -f /etc/gshadow.backup /etc/gshadow
+    rm -rf /etc/gshadow.backup
 fi
 
 %triggerposttransun -- setup < 2.8.8-4
