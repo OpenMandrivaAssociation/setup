@@ -1,15 +1,12 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	8
+Release:	9
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
-Requires(posttrans):	nscd
-Requires(posttrans):	shadow-conv
-#Requires(pre):	%{dlopen_req nss_files}
 BuildArch:	noarch
 
 %description
@@ -30,13 +27,26 @@ system, including the correct permissions for the directories.
 %install
 %makeinstall_std
 
-%posttrans
-# (tpg) these are mandatory!
-pwconv 2>/dev/null >/dev/null  || :
-grpconv 2>/dev/null >/dev/null  || :
+# (tpg) versioned pre/triggerin are to keep backup of
+# already existing /etc/shadow and /etc/gshadow to
+# keep them away of being rewriten by new files with this rpm
+# and finally allow user to login with his old passwords
+%pretriggerin -- setup < 2.8.8-9
+if [ -e /etc/shadow ]; then
+	mv -f /etc/shadow /etc/shadow.bakup
+fi
 
-if [ -x %{_sbindir}/nscd ]; then
-    nscd -i passwd -i group || :
+if [ -e /etc/gshadow ]; then
+	mv -f /etc/gshadow /etc/gshadow.bakup
+fi
+
+%triggerin -- setup < 2.8.8-9
+if [ -e /etc/shadow.backup ]; then
+	mv -f /etc/shadow.bak /etc/shadow
+fi
+
+if [ -e /etc/gshadow.backup ]; then
+	mv -f /etc/gshadow.backup /etc/gshadow
 fi
 
 %triggerposttransun -- setup < 2.8.8-4
@@ -46,12 +56,12 @@ sed -i -e "s,/sbin:/sbin/halt,/bin:/bin/halt,g" /etc/passwd ||:
 %files
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
-%attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/shadow
+%verify(not md5 size mtime) %attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/shadow
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
-%attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/gshadow
+%verify(not md5 size mtime) %attr(0440,root,root) %config(noreplace,missingok) %{_sysconfdir}/gshadow
 %config(noreplace) %{_sysconfdir}/services
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/inputrc
 %config(noreplace) %{_sysconfdir}/filesystems
