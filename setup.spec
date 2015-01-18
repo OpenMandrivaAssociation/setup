@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	9
+Release:	10
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -31,25 +31,35 @@ system, including the correct permissions for the directories.
 # already existing /etc/shadow and /etc/gshadow to
 # keep them away from being rewriten by new files with this rpm
 # and finally allow user to login with his old passwords
-%pretrans
-if [ -e /etc/shadow ]; then
-	mv -f /etc/shadow /etc/shadow.backup
-fi
+%pretrans -p <lua>
+--(tpg) seems like arg=arg+1 for lua
+if arg[2] >= 2 then
+    sh = posix.stat("/etc/shadow")
+    if sh then
+	os.rename("/etc/shadow", "/etc/shadow.backup")
+    end
 
-if [ -e /etc/gshadow ]; then
-	mv -f /etc/gshadow /etc/gshadow.backup
-fi
+    gs = posix.stat("/etc/gshadow")
+    if gs then
+	os.rename("/etc/gshadow", "/etc/gshadow.backup")
+    end
+end
 
-%posttrans
-if [ -e /etc/shadow.backup ]; then
-	mv -f /etc/shadow.bak /etc/shadow
-    rm -rf /etc/shadow.backup
-fi
+%posttrans -p <lua>
+--(tpg) seems like arg=arg+1 for lua
+if arg[2] >= 2 then
+    shb = posix.stat("/etc/shadow.backup")
+    if shb then
+	os.remove("/etc/shadow")
+	os.rename("/etc/shadow.backup", "/etc/shadow")
+    end
 
-if [ -e /etc/gshadow.backup ]; then
-	mv -f /etc/gshadow.backup /etc/gshadow
-    rm -rf /etc/gshadow.backup
-fi
+    gsb = posix.stat("/etc/gshadow.backup")
+    if gsb then
+	os.remove("/etc/gshadow")
+	os.rename("/etc/gshadow.backup", "/etc/gshadow")
+    end
+end
 
 %triggerposttransun -- setup < 2.8.8-4
 sed -i -e "s,/bin/nologin,/sbin/nologin,g" /etc/shells ||:
