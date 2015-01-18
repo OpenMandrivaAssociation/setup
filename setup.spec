@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	10
+Release:	11
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -51,13 +51,13 @@ if arg[2] >= 2 then
     shb = posix.stat("/etc/shadow.backup")
     if shb then
 	os.remove("/etc/shadow")
-	os.rename("/etc/shadow.backup", "/etc/shadow")
+	os.execute("cp -f /etc/shadow.backup /etc/shadow")
     end
 
     gsb = posix.stat("/etc/gshadow.backup")
     if gsb then
 	os.remove("/etc/gshadow")
-	os.rename("/etc/gshadow.backup", "/etc/gshadow")
+	os.execute("cp -f /etc/gshadow.backup /etc/gshadow")
     end
 end
 
