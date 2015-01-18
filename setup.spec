@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	11
+Release:	12
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -33,32 +33,29 @@ system, including the correct permissions for the directories.
 # and finally allow user to login with his old passwords
 %pretrans -p <lua>
 --(tpg) seems like arg=arg+1 for lua
-if arg[2] >= 2 then
-    sh = posix.stat("/etc/shadow")
-    if sh then
-	os.rename("/etc/shadow", "/etc/shadow.backup")
-    end
-
-    gs = posix.stat("/etc/gshadow")
-    if gs then
-	os.rename("/etc/gshadow", "/etc/gshadow.backup")
-    end
+sh = posix.stat("/etc/shadow")
+if sh then
+    os.rename("/etc/shadow", "/etc/shadow.backup")
 end
+
+gs = posix.stat("/etc/gshadow")
+if gs then
+    os.rename("/etc/gshadow", "/etc/gshadow.backup")
+end
+
 
 %posttrans -p <lua>
 --(tpg) seems like arg=arg+1 for lua
-if arg[2] >= 2 then
-    shb = posix.stat("/etc/shadow.backup")
-    if shb then
-	os.remove("/etc/shadow")
-	os.execute("cp -f /etc/shadow.backup /etc/shadow")
-    end
+shb = posix.stat("/etc/shadow.backup")
+if shb then
+    os.remove("/etc/shadow")
+    os.execute("cp -f /etc/shadow.backup /etc/shadow")
+end
 
-    gsb = posix.stat("/etc/gshadow.backup")
-    if gsb then
-	os.remove("/etc/gshadow")
-	os.execute("cp -f /etc/gshadow.backup /etc/gshadow")
-    end
+gsb = posix.stat("/etc/gshadow.backup")
+if gsb then
+    os.remove("/etc/gshadow")
+    os.execute("cp -f /etc/gshadow.backup /etc/gshadow")
 end
 
 %triggerposttransun -- setup < 2.8.8-4
