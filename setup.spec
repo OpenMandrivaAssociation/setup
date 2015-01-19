@@ -7,7 +7,6 @@ Group:		System/Base
 Url:		https://abf.io/software/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
-Requires(pretrans): filesystem
 BuildArch:	noarch
 
 %description
