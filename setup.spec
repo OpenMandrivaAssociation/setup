@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	15
+Release:	16
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -14,8 +14,8 @@ The setup package contains a set of very important system configuration, setup
 files and directories, such as passwd, group, profile, basic directory layout
 for a Linux system and more.
 
-The filesystem is one of the basic packages that is installed on a Linux 
-system.  Filesystem  contains the basic directory layout for a Linux operating 
+The filesystem is one of the basic packages that is installed on a Linux
+system.  Filesystem  contains the basic directory layout for a Linux operating
 system, including the correct permissions for the directories.
 
 %prep
