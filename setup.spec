@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	16
+Release:	18
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -62,7 +62,7 @@ end
 sed -i -e "s,/bin/nologin,/sbin/nologin,g" /etc/shells ||:
 sed -i -e "s,/sbin:/sbin/halt,/bin:/bin/halt,g" /etc/passwd ||:
 
-%triggerun -p <lua> -- %{name} < 2.8.8-14
+%triggerin -p <lua> -- %{name}
 posix.chown("/etc/shadow", "root", "shadow")
 posix.chmod("/etc/shadow", "0440")
 posix.chown("/etc/gshadow", "root", "shadow")
