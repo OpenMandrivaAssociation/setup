@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	18
+Release:	19
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -50,19 +50,23 @@ shb = posix.stat("/etc/shadow.backup")
 if shb then
     os.remove("/etc/shadow")
     os.execute("cp -f /etc/shadow.backup /etc/shadow")
+    posix.chown("/etc/shadow", "root", "shadow")
+	posix.chmod("/etc/shadow", "0440")
 end
 
 gsb = posix.stat("/etc/gshadow.backup")
 if gsb then
     os.remove("/etc/gshadow")
     os.execute("cp -f /etc/gshadow.backup /etc/gshadow")
+    posix.chown("/etc/gshadow", "root", "shadow")
+	posix.chmod("/etc/gshadow", "0440")
 end
 
 %triggerposttransun -- setup < 2.8.8-4
 sed -i -e "s,/bin/nologin,/sbin/nologin,g" /etc/shells ||:
 sed -i -e "s,/sbin:/sbin/halt,/bin:/bin/halt,g" /etc/passwd ||:
 
-%triggerin -p <lua> -- %{name}
+%triggerun -p <lua> -- %{name} < 2.8.8-14
 posix.chown("/etc/shadow", "root", "shadow")
 posix.chmod("/etc/shadow", "0440")
 posix.chown("/etc/gshadow", "root", "shadow")
