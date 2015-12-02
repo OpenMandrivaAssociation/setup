@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.8
-Release:	21
+Release:	22
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -96,6 +96,7 @@ end
 %config(noreplace) %{_sysconfdir}/hosts.allow
 %config(noreplace) %{_sysconfdir}/hosts.deny
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/motd
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/motd-ssh
 %config(noreplace) %{_sysconfdir}/printcap
 %config(noreplace) %{_sysconfdir}/profile
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/shells
