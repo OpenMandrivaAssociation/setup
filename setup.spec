@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.8.8
-Release:	22
+Version:	2.8.9
+Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -26,6 +26,7 @@ system, including the correct permissions for the directories.
 
 %install
 %makeinstall_std
+touch %{buildroot}%{_sysconfdir}/fstab
 
 # (tpg) versioned pre/post trans are here to keep backup of
 # already existing /etc/shadow and /etc/gshadow to
@@ -51,7 +52,7 @@ if shb then
     os.remove("/etc/shadow")
     os.execute("cp -f /etc/shadow.backup /etc/shadow")
     posix.chown("/etc/shadow", "root", "shadow")
-	posix.chmod("/etc/shadow", "0440")
+    posix.chmod("/etc/shadow", "0440")
 end
 
 gsb = posix.stat("/etc/gshadow.backup")
@@ -59,7 +60,7 @@ if gsb then
     os.remove("/etc/gshadow")
     os.execute("cp -f /etc/gshadow.backup /etc/gshadow")
     posix.chown("/etc/gshadow", "root", "shadow")
-	posix.chmod("/etc/gshadow", "0440")
+    posix.chmod("/etc/gshadow", "0440")
 end
 
 %triggerposttransun -- setup < 2.8.8-4
@@ -72,20 +73,18 @@ posix.chmod("/etc/shadow", "0440")
 posix.chown("/etc/gshadow", "root", "shadow")
 posix.chmod("/etc/gshadow", "0440")
 if posix.access("/etc/shadow-", "r") then
-	posix.chown("/etc/shadow-", "root", "shadow")
-	posix.chmod("/etc/shadow-", "0440")
+    posix.chown("/etc/shadow-", "root", "shadow")
+    posix.chmod("/etc/shadow-", "0440")
 end
 if posix.access("/etc/gshadow-", "r") then
-	posix.chown("/etc/gshadow-", "root", "shadow")
-	posix.chmod("/etc/gshadow-", "0440")
+    posix.chown("/etc/gshadow-", "root", "shadow")
+    posix.chmod("/etc/gshadow-", "0440")
 end
 
 %files
 %doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
 %verify(not md5 size mtime) %attr(0440,root,shadow) %config(noreplace,missingok) %{_sysconfdir}/shadow
-%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/fstab
-%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/resolv.conf
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
 %verify(not md5 size mtime) %attr(0440,root,shadow) %config(noreplace,missingok) %{_sysconfdir}/gshadow
@@ -105,3 +104,4 @@ end
 %config(noreplace) %{_sysconfdir}/csh.cshrc
 %dir %{_sysconfdir}/profile.d
 %ghost %verify(not md5 size mtime) %config(noreplace,missingok) %{_logdir}/lastlog
+%ghost %verify(not md5 size mtime) %config(noreplace,missingok) %{_sysconfdir}/fstab
