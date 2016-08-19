@@ -1,13 +1,17 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.9
-Release:	3
+Release:	4
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
 Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 BuildArch:	noarch
+# requires systemd with a resolved to avoid losing network during upgrade
+# as this package will remove the existing resolv.conf which it used to 
+# own
+Requires:	systemd > 229
 
 %description
 The setup package contains a set of very important system configuration, setup 
