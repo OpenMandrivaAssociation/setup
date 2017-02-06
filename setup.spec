@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.9
-Release:	4
+Release:	5
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -9,7 +9,7 @@ Source0:	%{name}-%{version}.tar.xz
 Source1:	setup.rpmlintrc
 BuildArch:	noarch
 # requires systemd with a resolved to avoid losing network during upgrade
-# as this package will remove the existing resolv.conf which it used to 
+# as this package will remove the existing resolv.conf which it used to
 # own
 Requires:	systemd > 229
 
@@ -103,6 +103,7 @@ end
 %config(noreplace) %{_sysconfdir}/printcap
 %config(noreplace) %{_sysconfdir}/profile
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/shells
+%config(noreplace) %{_sysconfdir}/ethertypes
 %config(noreplace) %{_sysconfdir}/protocols
 %config(noreplace) %{_sysconfdir}/csh.login
 %config(noreplace) %{_sysconfdir}/csh.cshrc
