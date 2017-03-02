@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.8.9
-Release:	5
+Release:	6
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
@@ -12,6 +12,9 @@ BuildArch:	noarch
 # as this package will remove the existing resolv.conf which it used to
 # own
 Requires:	systemd > 229
+# due to ethertypes addition
+Conflicts:	iptables < 1.6.1-2
+Confclits:	ebtables < 2.0.10.4-18
 
 %description
 The setup package contains a set of very important system configuration, setup 
