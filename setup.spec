@@ -14,7 +14,7 @@ BuildArch:	noarch
 Requires:	systemd > 229
 # due to ethertypes addition
 Conflicts:	iptables < 1.6.1-2
-Confclits:	ebtables < 2.0.10.4-18
+Conflicts:	ebtables < 2.0.10.4-18
 
 %description
 The setup package contains a set of very important system configuration, setup 
