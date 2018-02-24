@@ -1,11 +1,11 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.8.9
+Version:	2.9.0
 Release:	7
 License:	Public Domain
 Group:		System/Base
 Url:		https://abf.io/software/setup
-Source0:	%{name}-%{version}.tar.xz
+Source0:	%{name}-%{version}.tar.gz
 Source1:	setup.rpmlintrc
 BuildArch:	noarch
 # due to ethertypes addition

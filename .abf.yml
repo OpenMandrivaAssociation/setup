@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   setup-2.8.9.tar.xz: 42f0d00e0b81ebbf81e921e075a1d59ca90be937
+sources:
+  setup-2.9.0.tar.gz: 3e6b53e02667d3737cc66ca1239ef173deaebe5e
