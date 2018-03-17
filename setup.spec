@@ -1,11 +1,11 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.9.0
-Release:	1
+Release:	2
 License:	Public Domain
 Group:		System/Base
-Url:		https://abf.io/software/setup
-Source0:	%{name}-%{version}.tar.gz
+Url:		https://github.com/OpenMandrivaSoftware/setup
+Source0:	https://github.com/OpenMandrivaSoftware/setup/archive/%{name}-%{version}.tar.gz
 Source1:	setup.rpmlintrc
 BuildArch:	noarch
 # due to ethertypes addition
@@ -25,10 +25,10 @@ system, including the correct permissions for the directories.
 %setup -q
 
 %build
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 touch %{buildroot}%{_sysconfdir}/fstab
 
 # (tpg) versioned pre/post trans are here to keep backup of
@@ -65,10 +65,6 @@ if gsb then
     posix.chown("/etc/gshadow", "root", "shadow")
     posix.chmod("/etc/gshadow", "0440")
 end
-
-%triggerposttransun -- setup < 2.8.8-4
-sed -i -e "s,/bin/nologin,/sbin/nologin,g" /etc/shells ||:
-sed -i -e "s,/sbin:/sbin/halt,/bin:/bin/halt,g" /etc/passwd ||:
 
 %triggerun -p <lua> -- %{name} < 2.8.8-14
 posix.chown("/etc/shadow", "root", "shadow")
