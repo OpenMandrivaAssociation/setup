@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.9.1
-Release:	4
+Version:	2.9.2
+Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://github.com/OpenMandrivaSoftware/setup
@@ -103,5 +103,7 @@ end
 %config(noreplace) %{_sysconfdir}/csh.login
 %config(noreplace) %{_sysconfdir}/csh.cshrc
 %dir %{_sysconfdir}/profile.d
+%{_sysconfdir}/profile.d/*.csh
+%{_sysconfdir}/profile.d/*.sh
 %ghost %verify(not md5 size mtime) %config(noreplace,missingok) %{_logdir}/lastlog
 %ghost %verify(not md5 size mtime) %config(noreplace,missingok) %{_sysconfdir}/fstab
