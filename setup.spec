@@ -5,7 +5,7 @@ Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://github.com/OpenMandrivaSoftware/setup
-Source0:	https://github.com/OpenMandrivaSoftware/setup/archive/%{version}.tar.gz
+Source0:	https://github.com/OpenMandrivaSoftware/setup/archive/%{name}-%{version}.tar.gz
 Source1:	setup.rpmlintrc
 BuildArch:	noarch
 # due to ethertypes addition
