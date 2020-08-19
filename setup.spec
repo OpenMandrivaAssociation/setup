@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.9.3
-Release:	2
+Version:	2.9.3.1
+Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://github.com/OpenMandrivaSoftware/setup
@@ -22,7 +22,7 @@ system.  Filesystem  contains the basic directory layout for a Linux operating
 system, including the correct permissions for the directories.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %make_build
