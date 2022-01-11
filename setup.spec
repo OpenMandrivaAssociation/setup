@@ -1,11 +1,11 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.9.3.3
+Version:	2.9.4
 Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://github.com/OpenMandrivaSoftware/setup
-Source0:	https://github.com/OpenMandrivaSoftware/setup/archive/%{name}-%{version}.tar.gz
+Source0:	https://github.com/OpenMandrivaSoftware/setup/archive/refs/tags/%{version}.tar.gz
 Source1:	setup.rpmlintrc
 Requires:	system-release
 BuildArch:	noarch
@@ -30,7 +30,6 @@ system, including the correct permissions for the directories.
 touch %{buildroot}%{_sysconfdir}/fstab
 
 %files
-%doc NEWS
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
 %verify(not md5 size mtime) %attr(0440,root,shadow) %config(noreplace,missingok) %{_sysconfdir}/shadow
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
