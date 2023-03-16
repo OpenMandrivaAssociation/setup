@@ -1,13 +1,14 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
 Version:	2.9.4
-Release:	1
+Release:	2
 License:	Public Domain
 Group:		System/Base
 Url:		https://github.com/OpenMandrivaSoftware/setup
 Source0:	https://github.com/OpenMandrivaSoftware/setup/archive/refs/tags/%{version}.tar.gz
 Source1:	setup.rpmlintrc
-Requires:	system-release
+Requires(meta):	system-release
+OrderWithRequires:	filesystem
 BuildArch:	noarch
 
 %description
