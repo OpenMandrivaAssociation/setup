@@ -17,6 +17,7 @@ Provides:	group(usb)
 Provides:	group(nogroup)
 Provides:	user(rpm)
 
+BuildRequires:	make
 %description
 The setup package contains a set of very important system configuration, setup 
 files and directories, such as passwd, group, profile, basic directory layout
