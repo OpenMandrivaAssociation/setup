@@ -1,7 +1,7 @@
 Summary:	A set of system configuration, setup files and directories
 Name:		setup
-Version:	2.9.4
-Release:	4
+Version:	2.9.5
+Release:	1
 License:	Public Domain
 Group:		System/Base
 Url:		https://github.com/OpenMandrivaSoftware/setup
@@ -43,6 +43,8 @@ touch %{buildroot}%{_sysconfdir}/fstab
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
 %verify(not md5 size mtime) %attr(0440,root,shadow) %config(noreplace,missingok) %{_sysconfdir}/gshadow
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/subuid
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/subgid
 %config(noreplace) %{_sysconfdir}/services
 %verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/inputrc
 %config(noreplace) %{_sysconfdir}/filesystems
