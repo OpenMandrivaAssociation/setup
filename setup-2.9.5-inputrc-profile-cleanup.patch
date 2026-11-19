@@ -1,0 +1,112 @@
+--- a/inputrc	2026-11-19 16:52:32.874290963 +0500
++++ b/inputrc	2026-11-19 16:52:32.874321363 +0500
+@@ -1,10 +1,15 @@
+ # do not bell on tab-completion
+-#set bell-style none
++set bell-style none
+ 
+-# Show all if ambigious.
++# Show all if ambiguous without waiting for a second Tab press.
+ set show-all-if-ambiguous on
++set completion-ignore-case on
++set completion-map-case on
++set colored-stats on
++set colored-completion-prefix on
++set skip-completed-text on
+ 
+-# 8Bits supports.
++# 8-bit / UTF-8 input and output support.
+ set meta-flag on
+ set input-meta on
+ set convert-meta off
+@@ -22,33 +27,21 @@ set page-completions off
+ # only for emacs mode; until the bug is fixed (in libreadline?)
+ $if mode=emacs
+ 
+-# Keyboard configuration
+-"[2~": yank			# Insert
+-"[3~":delete-char		# Suppr
+-
+-"[1~": beginning-of-line	# Home
+-"[4~": end-of-line		# End
+-# for linux console and RH/Debian xterm
++# Keyboard configuration (Linux console, xterm/Konsole, rxvt, FreeBSD)
+ "\e[1~": beginning-of-line
+ "\e[4~": end-of-line
+-# commented out keymappings for pgup/pgdown to reach begin/end of history
+-#"\e[5~": beginning-of-history
+-#"\e[6~": end-of-history
++# typing the beginning of a previous command then
++# PgUp/PgDn cycles through history only for matching entries
+ "\e[5~": history-search-backward
+ "\e[6~": history-search-forward
+ "\e[3~": delete-char
+ "\e[2~": overwrite-mode
+ "\e[5C": forward-word
+ "\e[5D": backward-word
+-# on gnome-terminal (mdvbz#36287)
++# Ctrl+Left / Ctrl+Right on xterm/Konsole/VTE
+ "\e[1;5C": forward-word
+ "\e[1;5D": backward-word
+ 
+-# typing the beginning of a previous command then
+-# PgUp/PgDw cycles trough history only for matching entries
+-"[5~": history-search-backward	# Previous
+-"[6~": history-search-forward		# Next
+-
+ # for rxvt
+ "\e[7~": beginning-of-line
+ "\e[8~": end-of-line
+@@ -68,23 +61,14 @@ $if mode=emacs
+ "\e[e": end-of-line
+ 
+ $if term=xterm
+-#
+-# Application keypad and cursor of xterm
+-# with NumLock ON
+-#
+-# Operators
++# Application keypad and cursor of xterm with NumLock ON
+ "\eOo":         "/"
+ "\eOj":         "*"
+ "\eOm":         "-"
+ "\eOk":         "+"
+ "\eOl":         "+"
+ "\eOM":         accept-line
+-
+-# Colon and dot
+-# "\eOl":	","
+-"\eOn":		"."
+-
+-# Numbers
++"\eOn":         "."
+ "\eOp":         "0"
+ "\eOq":         "1"
+ "\eOr":         "2"
+@@ -97,9 +81,7 @@ $if term=xterm
+ "\eOy":         "9"
+ $endif
+ 
+-#
+ # Application keypad and cursor of xterm
+-#
+ "\eOD":         backward-char
+ "\eOC":         forward-char
+ "\eOA":         previous-history
+--- a/profile	2026-11-19 16:52:32.874349032 +0500
++++ b/profile	2026-11-19 16:52:32.874373052 +0500
+@@ -17,9 +17,12 @@ umask 022
+ USER="$(id -un)"
+ LOGNAME=$USER
+ MAIL="/var/spool/mail/$USER"
+-HISTCONTROL=ignoredups
++case ":${HISTCONTROL:-}:" in
++	*:ignorespace:*) ;;
++	*) HISTCONTROL=ignoreboth:erasedups ;;
++esac
+ HOSTNAME="$(/usr/bin/hostnamectl --transient 2>/dev/null)"
+-HISTSIZE=1000
++HISTSIZE=
+ 
+ if [ -z "$INPUTRC" ] && [ ! -f "$HOME/.inputrc" ]; then
+ 	INPUTRC=/etc/inputrc
